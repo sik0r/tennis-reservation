@@ -1,0 +1,22 @@
+version: '3.9'
+services: 
+  web:
+    build:
+      context: ./docker
+    container_name: tennis_web
+    ports:
+        - 80:80
+    links:
+      - db:database
+    volumes:
+        - ./:/var/www/html
+  db:
+    image: mariadb:10.1
+    container_name: tennis_db
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_DATABASE: tennis
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    ports:
+      - "3306:3306"
