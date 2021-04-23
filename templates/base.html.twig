@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Rezerwacja kortu{% endblock %}</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div id="root"></div>
+        {% block body %}{% endblock %}
+    </body>
+</html>

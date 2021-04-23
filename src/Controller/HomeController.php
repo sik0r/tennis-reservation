@@ -1,15 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace Sik0r\TennisReservation\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    public function index(): JsonResponse
+    #[Route('/{reactRouting}', name: 'home', defaults: ['reactRouting' => null])]
+    public function index(): Response
     {
-        return new JsonResponse(['data' => 'Welcome!']);
+        return $this->render('base.html.twig');
     }
 }
