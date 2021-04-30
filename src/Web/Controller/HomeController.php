@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Sik0r\TennisReservation\Controller;
+namespace Sik0r\TennisReservation\Web\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

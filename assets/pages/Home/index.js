@@ -7,11 +7,11 @@ const Home = () => {
     return (
         <>
             <Navigation/>
-            <Container>
+            <Container style={{marginTop: '40px'}}>
                 <Routes/>
             </Container>
         </>
     );
-}
+};
 
 export default Home;

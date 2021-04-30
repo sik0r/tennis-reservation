@@ -127,6 +127,21 @@
             "config/packages/ramsey_uuid_doctrine.yaml"
         ]
     },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        },
+        "files": [
+            "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "symfony/amqp-messenger": {
+        "version": "v5.2.4"
+    },
     "symfony/asset": {
         "version": "v5.2.4"
     },
@@ -159,6 +174,9 @@
     },
     "symfony/doctrine-bridge": {
         "version": "v5.2.6"
+    },
+    "symfony/doctrine-messenger": {
+        "version": "v5.2.5"
     },
     "symfony/dotenv": {
         "version": "v5.2.4"
@@ -219,6 +237,18 @@
     "symfony/http-kernel": {
         "version": "v5.2.6"
     },
+    "symfony/messenger": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "e9a414b113ceadbf4e52abe37bf8f1b443f06ccb"
+        },
+        "files": [
+            "config/packages/messenger.yaml"
+        ]
+    },
     "symfony/orm-pack": {
         "version": "v2.1.0"
     },
@@ -237,7 +267,16 @@
     "symfony/polyfill-php80": {
         "version": "v1.22.1"
     },
+    "symfony/property-access": {
+        "version": "v5.2.4"
+    },
+    "symfony/property-info": {
+        "version": "v5.2.4"
+    },
     "symfony/proxy-manager-bridge": {
+        "version": "v5.2.4"
+    },
+    "symfony/redis-messenger": {
         "version": "v5.2.4"
     },
     "symfony/routing": {
@@ -285,6 +324,19 @@
     },
     "symfony/twig-pack": {
         "version": "v1.0.1"
+    },
+    "symfony/validator": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "d902da3e4952f18d3bf05aab29512eb61cabd869"
+        },
+        "files": [
+            "config/packages/test/validator.yaml",
+            "config/packages/validator.yaml"
+        ]
     },
     "symfony/var-dumper": {
         "version": "v5.2.6"

@@ -23,6 +23,9 @@ const Navigation = () => {
                     <NavItem>
                         <NavLink className="nav-link" to="/counter">Counter</NavLink>
                     </NavItem>
+                    <NavItem className="float-right">
+                        <NavLink className="nav-link" to="/register">Rejestracja</NavLink>
+                    </NavItem>
                 </Nav>
                 <NavbarText>TENNIS</NavbarText>
             </Collapse>

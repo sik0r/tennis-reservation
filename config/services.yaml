@@ -1,31 +1,34 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 
 services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    Sik0r\TennisReservation\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
-            - '../src/Tests/'
+  _instanceof:
+    # all services implementing the CommandHandlerInterface
+    # will be registered on the command.bus bus
+    Sik0r\TennisReservation\Application\CommandHandlers\CommandHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
+    # while those implementing QueryBusInterface will be
+    # registered on the query.bus bus
+    Sik0r\TennisReservation\Application\QueryHandlers\QueryHandlerInterface:
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    Sik0r\TennisReservation\Controller\:
-        resource: '../src/Controller/'
-        tags: ['controller.service_arguments']
+  Sik0r\TennisReservation\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Domain/Entity/'
+      - '../src/Kernel.php'
+      - '../src/Tests/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+  Sik0r\TennisReservation\Web\Controller\:
+    resource: '../src/Web/Controller/'
+    tags: [ 'controller.service_arguments' ]
+
+  Sik0r\TennisReservation\Web\Listeners\RequestDecodeListener:
+    tags:
+      - { name: kernel.event_listener, event: kernel.request }
