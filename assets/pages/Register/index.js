@@ -15,11 +15,17 @@ const Register = () => {
 
     const formik = useFormik({
         initialValues: initialValues,
-        onSubmit: async (values) => {
+        onSubmit: async (values, actions) => {
             const response = await axios.post('/api/players', JSON.stringify(values), {
                 headers: {
                     'content-type': 'application/json'
                 }
+            }).then(res => {
+                actions.setSubmitting(false);
+                actions.resetForm();
+            }).catch(e => {
+                actions.setSubmitting(false);
+                setErrors(e.response.data.errors)
             });
 
             if (response.status === 201) {
@@ -29,6 +35,15 @@ const Register = () => {
         validationSchema: registerValidator,
         initialErrors: initialValues
     })
+
+    const setErrors = (errors) => {
+        const mappedErrors = [];
+        errors.forEach(value => {
+            mappedErrors[value.propertyPath] = value.message;
+        });
+
+        formik.setErrors(mappedErrors);
+    }
 
     return (
         <>
