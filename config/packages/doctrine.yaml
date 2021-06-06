@@ -14,9 +14,9 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
     auto_mapping: true
     mappings:
-      Sik0r\TennisReservation\Domain\Entity:
+      Sik0r\TennisReservation\Domain:
         is_bundle: false
         type: xml
         dir: '%kernel.project_dir%/config/doctrine/mappings'
-        prefix: 'Sik0r\TennisReservation\Domain\Entity'
-        alias: Sik0r\TennisReservation\Domain\Entity
+        prefix: 'Sik0r\TennisReservation\Domain'
+        alias: Sik0r\TennisReservation\Domain

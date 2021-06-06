@@ -5,23 +5,26 @@ namespace Sik0r\TennisReservation\Web\ParamConverters;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
-use Sik0r\TennisReservation\Application\Commands\CommandInterface;
+use Sik0r\TennisReservation\Web\Request\RequestInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class RequestBodyParamConverter implements ParamConverterInterface
 {
     public function apply(Request $request, ParamConverter $configuration): bool
     {
-        $commandClass = $configuration->getClass();
-        $command = $commandClass::create($request->request->all());
+        $class = $configuration->getClass();
+        $result = call_user_func([$class, 'fromRequest'], $request);
+        if (!$result instanceof RequestInterface) {
+            return false;
+        }
 
-        $request->attributes->set($configuration->getName(), $command);
+        $request->attributes->set($configuration->getName(), $result);
 
         return true;
     }
 
     public function supports(ParamConverter $configuration): bool
     {
-        return in_array(CommandInterface::class, class_implements($configuration->getClass()));
+        return in_array(RequestInterface::class, class_implements($configuration->getClass()));
     }
 }

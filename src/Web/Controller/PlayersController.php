@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Sik0r\TennisReservation\Web\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Ramsey\Uuid\Uuid;
 use Sik0r\TennisReservation\Application\CommandBusInterface;
 use Sik0r\TennisReservation\Application\Commands\Player\CreatePlayerCommand;
+use Sik0r\TennisReservation\Web\Request\Players\CreatePlayerRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,8 +24,16 @@ class PlayersController extends AbstractController
     }
 
     #[Route('/api/players', name: 'create_player', methods: ['POST'])]
-    public function createAction(CreatePlayerCommand $command): JsonResponse
+    public function createAction(CreatePlayerRequest $request): JsonResponse
     {
+        $command = new CreatePlayerCommand(
+            Uuid::uuid4(),
+            $request->getUsername(),
+            $request->getEmail(),
+            $request->getPassword(),
+            $request->getConfirmPassword()
+        );
+
         try {
             $this->commandBus->dispatch($command);
         } catch (ValidationFailedException $e) {
@@ -40,6 +49,8 @@ class PlayersController extends AbstractController
             return new JsonResponse(['errors' => $errors, 'message' => $e->getMessage()], Response::HTTP_CONFLICT);
         }
 
-        return new JsonResponse(null, Response::HTTP_CREATED);
+        return new JsonResponse(null, Response::HTTP_CREATED, [
+            'location' => "api/players/{$command->getUsername()}"
+        ]);
     }
 }
