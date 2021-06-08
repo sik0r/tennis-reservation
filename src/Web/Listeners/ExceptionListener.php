@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Sik0r\TennisReservation\Web\Listeners;
 
+use Psr\Log\LoggerInterface;
 use Sik0r\TennisReservation\Web\ViewModel\ErrorViewModel;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,13 @@ use Throwable;
 
 class ExceptionListener
 {
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
     public function __invoke(ExceptionEvent $event): void
     {
         if (!$this->supports($event->getRequest())) {
@@ -24,6 +32,14 @@ class ExceptionListener
 
         $event->allowCustomResponseCode();
         $event->setResponse($response);
+
+        $this->logger->error($throwable->getMessage(), [
+            'status' => $response->getStatusCode(),
+            'code' => $throwable->getCode(),
+            'file' => $throwable->getFile(),
+            'line' => $throwable->getLine(),
+            'stacktrace' => $throwable->getTraceAsString(),
+        ]);
     }
 
     private function supports(Request $request): bool
