@@ -10,9 +10,7 @@ use Sik0r\TennisReservation\Web\Request\Players\CreatePlayerRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\ConstraintViolationInterface;
 
 class PlayersController extends AbstractController
 {
@@ -34,20 +32,7 @@ class PlayersController extends AbstractController
             $request->getConfirmPassword()
         );
 
-        try {
-            $this->commandBus->dispatch($command);
-        } catch (ValidationFailedException $e) {
-            $errors = [];
-            /** @var ConstraintViolationInterface $violation */
-            foreach ($e->getViolations() as $violation) {
-                $errors[] = [
-                    'propertyPath' => $violation->getPropertyPath(),
-                    'message' => $violation->getMessage(),
-                ];
-            }
-
-            return new JsonResponse(['errors' => $errors, 'message' => $e->getMessage()], Response::HTTP_CONFLICT);
-        }
+        $this->commandBus->dispatch($command);
 
         return new JsonResponse(null, Response::HTTP_CREATED, [
             'location' => "api/players/{$command->username()}"

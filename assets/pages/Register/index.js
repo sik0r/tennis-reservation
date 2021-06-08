@@ -7,10 +7,10 @@ import axios from "axios";
 const Register = () => {
     const [showAlert, setShowAlert] = useState(false);
     const initialValues = {
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+        username: 'ddd',
+        email: 'ddd@o2.pl',
+        password: 'P@ssw0rd',
+        confirmPassword: 'P@ssw0rd'
     };
 
     const formik = useFormik({
@@ -23,6 +23,9 @@ const Register = () => {
             }).then(res => {
                 actions.setSubmitting(false);
                 actions.resetForm();
+                if (res.status === 201) {
+                    setShowAlert(true);
+                }
             }).catch(e => {
                 actions.setSubmitting(false);
                 setErrors(e.response.data.errors)
