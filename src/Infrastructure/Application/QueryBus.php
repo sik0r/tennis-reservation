@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Sik0r\TennisReservation\Infrastructure\Application;
 
-use Sik0r\TennisReservation\Application\Queries\QueryInterface;
+use Sik0r\TennisReservation\Application\QueryInterface;
 use Sik0r\TennisReservation\Application\QueryBusInterface;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;

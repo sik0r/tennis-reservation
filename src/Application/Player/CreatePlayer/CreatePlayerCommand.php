@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Sik0r\TennisReservation\Application\Commands\Player;
+namespace Sik0r\TennisReservation\Application\Player\CreatePlayer;
 
 use Ramsey\Uuid\UuidInterface;
-use Sik0r\TennisReservation\Application\Commands\CommandInterface;
+use Sik0r\TennisReservation\Application\CommandInterface;
 
 class CreatePlayerCommand implements CommandInterface
 {
@@ -28,22 +28,22 @@ class CreatePlayerCommand implements CommandInterface
         return $this->playerId;
     }
 
-    public function getUsername(): ?string
+    public function username(): ?string
     {
         return $this->username;
     }
 
-    public function getEmail(): ?string
+    public function email(): ?string
     {
         return $this->email;
     }
 
-    public function getPassword(): ?string
+    public function password(): ?string
     {
         return $this->password;
     }
 
-    public function getConfirmPassword(): ?string
+    public function confirmPassword(): ?string
     {
         return $this->confirmPassword;
     }

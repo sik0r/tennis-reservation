@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Sik0r\TennisReservation\Infrastructure\Application;
 
 use Sik0r\TennisReservation\Application\CommandBusInterface;
-use Sik0r\TennisReservation\Application\Commands\CommandInterface;
+use Sik0r\TennisReservation\Application\CommandInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class CommandBus implements CommandBusInterface

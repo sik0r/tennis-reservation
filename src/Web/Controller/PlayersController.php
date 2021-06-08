@@ -5,7 +5,7 @@ namespace Sik0r\TennisReservation\Web\Controller;
 
 use Ramsey\Uuid\Uuid;
 use Sik0r\TennisReservation\Application\CommandBusInterface;
-use Sik0r\TennisReservation\Application\Commands\Player\CreatePlayerCommand;
+use Sik0r\TennisReservation\Application\Player\CreatePlayer\CreatePlayerCommand;
 use Sik0r\TennisReservation\Web\Request\Players\CreatePlayerRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -50,7 +50,7 @@ class PlayersController extends AbstractController
         }
 
         return new JsonResponse(null, Response::HTTP_CREATED, [
-            'location' => "api/players/{$command->getUsername()}"
+            'location' => "api/players/{$command->username()}"
         ]);
     }
 }

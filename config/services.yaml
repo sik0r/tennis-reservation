@@ -8,12 +8,12 @@ services:
   _instanceof:
     # all services implementing the CommandHandlerInterface
     # will be registered on the command.bus bus
-    Sik0r\TennisReservation\Application\CommandHandlers\CommandHandlerInterface:
+    Sik0r\TennisReservation\Application\CommandHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: command.bus }
     # while those implementing QueryBusInterface will be
     # registered on the query.bus bus
-    Sik0r\TennisReservation\Application\QueryHandlers\QueryHandlerInterface:
+    Sik0r\TennisReservation\Application\QueryHandlerInterface:
       tags:
         - { name: messenger.message_handler, bus: query.bus }
 

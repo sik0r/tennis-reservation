@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Sik0r\TennisReservation\Application\CommandHandlers\Player;
+namespace Sik0r\TennisReservation\Application\Player\CreatePlayer;
 
-use Sik0r\TennisReservation\Application\CommandHandlers\CommandHandlerInterface;
-use Sik0r\TennisReservation\Application\Commands\Player\CreatePlayerCommand;
+use Sik0r\TennisReservation\Application\CommandHandlerInterface;
 use Sik0r\TennisReservation\Application\Services\PasswordEncoder;
 use Sik0r\TennisReservation\Domain\EntityPersisterInterface;
 use Sik0r\TennisReservation\Domain\Player\Player;
@@ -22,9 +21,9 @@ class CreatePlayerCommandHandler implements CommandHandlerInterface
     {
         $player = Player::create(
             $command->playerId(),
-            $command->getUsername(),
-            $command->getEmail(),
-            PasswordEncoder::encode($command->getPassword())
+            $command->username(),
+            $command->email(),
+            PasswordEncoder::encode($command->password())
         );
 
         $this->persister->add($player);

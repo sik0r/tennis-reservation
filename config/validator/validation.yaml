@@ -1,9 +1,9 @@
-Sik0r\TennisReservation\Application\Commands\Player\CreatePlayerCommand:
+Sik0r\TennisReservation\Application\Player\CreatePlayer\CreatePlayerCommand:
   properties:
     username:
       - Sik0r\TennisReservation\Infrastructure\Domain\Validators\Unique\UniqueEntity:
           fields: [username]
-          entityClass: Sik0r\TennisReservation\Domain\Entity\Player
+          entityClass: Sik0r\TennisReservation\Domain\Player\Player
       - NotBlank: ~
       - Length:
           min: 3
@@ -11,7 +11,7 @@ Sik0r\TennisReservation\Application\Commands\Player\CreatePlayerCommand:
     email:
       - Sik0r\TennisReservation\Infrastructure\Domain\Validators\Unique\UniqueEntity:
           fields: [ email ]
-          entityClass: Sik0r\TennisReservation\Domain\Entity\Player
+          entityClass: Sik0r\TennisReservation\Domain\Player\Player
       - Email: ~
       - NotBlank: ~
       - Length:

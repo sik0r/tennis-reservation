@@ -15,7 +15,6 @@ doctrine:
     auto_mapping: true
     mappings:
       Sik0r\TennisReservation\Domain:
-        is_bundle: false
         type: xml
         dir: '%kernel.project_dir%/config/doctrine/mappings'
         prefix: 'Sik0r\TennisReservation\Domain'
