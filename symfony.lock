@@ -273,6 +273,21 @@
     "symfony/orm-pack": {
         "version": "v2.1.0"
     },
+    "symfony/phpunit-bridge": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "05aa34fc27227a46bb75872b0efff102bd7d77e0"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.22.1"
     },
