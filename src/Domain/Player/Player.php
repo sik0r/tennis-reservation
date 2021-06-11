@@ -28,4 +28,14 @@ class Player implements EntityInterface
     {
         return new self($id, $username, $email, $password);
     }
+
+    public function id(): UuidInterface
+    {
+        return $this->id;
+    }
+
+    public function password(): string
+    {
+        return $this->password;
+    }
 }
